@@ -11,6 +11,7 @@ int main() {
     while (1) {       
         printf("Input: ");
         fgets(line, BUFFER_SIZE, stdin);
+        if (!strcmp(line, "exit")) return 0;
         write(to_server, line, sizeof(line));
         read(from_server, line, sizeof(line));
         printf("OUTPUT: %s\n", line);
