@@ -30,6 +30,7 @@ int server_handshake(int *to_client) {
   char response[BUFFER_SIZE];
   read(from_client, response, sizeof(response));
   int ra = atoi(response);
+  printf("testing for ack");
   if (ra != (atoi(ACK)+1)) {
     printf("fail\n");
     exit(0);
