@@ -17,10 +17,10 @@ int server_handshake(int *to_client) {
   mkfifo(WKP, 0644);
 
   //read sp from client message and removes WKP
-  from_client = open(WKP, O_RDONLY);
+  from_client = open(WKP, O_RDONLY, 0);
+  remove(WKP);
   char sp[HANDSHAKE_BUFFER_SIZE];
   read(from_client, sp, sizeof(sp));
-  remove(WKP);
 
   //send response to client
   *to_client = open(sp, O_WRONLY);
@@ -29,7 +29,10 @@ int server_handshake(int *to_client) {
   //receive final response from client
   char response[BUFFER_SIZE];
   read(from_client, response, sizeof(response));
-
+  int ra = atoi(response);
+  if (ra != (atoi(ACK)+1)) {
+    exit(0);
+  }
   return from_client;
 }
 
@@ -65,10 +68,9 @@ int client_handshake(int *to_server) {
   //remove sp
   remove(sp);
 
-  //send final response
-  if (!strcmp(msg, ACK)) {
-    write(*to_server, "Client message", sizeof("Client message"));
-  }
+  int r = atoi(msg) + 1;
+  sprintf(msg, "%d", r);
+  write(*to_server, msg, sizeof(msg));
 
   return from_server; 
 }

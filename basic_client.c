@@ -13,7 +13,7 @@ int main() {
         fgets(line, BUFFER_SIZE, stdin);
         line[strlen(line) - 1] = '\0';
         if (!strcmp(line, "exit")) return 0;
-        write(to_server, line, sizeof(line));
+        write(to_server, line, BUFFER_SIZE);
         char response[BUFFER_SIZE];
         read(from_server, response, sizeof(response));
         printf("OUTPUT: %s\n", response);

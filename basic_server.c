@@ -11,9 +11,10 @@ int main() {
     from_client = server_handshake( &to_client );
     char line[BUFFER_SIZE];
 
-    while (read(from_client, line, sizeof(line))) {       
+    while (1) {       
             
-        line[strlen(line) - 1] = '\0';
+        int input = read(from_client, line, sizeof(line));
+        if (input == -1) break;
         int len = strlen(line);
         int i;
         for (i = 0; i < len; i++) {
