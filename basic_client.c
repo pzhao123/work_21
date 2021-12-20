@@ -11,7 +11,7 @@ int main() {
         char line[BUFFER_SIZE];
         printf("Input: ");
         fgets(line, BUFFER_SIZE, stdin);
-        line[strlen(line) - 1] = '\0';
+        //line[strlen(line) - 1] = '\0';
         if (!strcmp(line, "exit")) return 0;
         write(to_server, line, BUFFER_SIZE);
         char response[BUFFER_SIZE];
