@@ -22,10 +22,12 @@ int server_handshake(int *to_client) {
   remove(WKP);
   char sp[HANDSHAKE_BUFFER_SIZE];
   read(from_client, sp, sizeof(sp));
+  printf("read sp\n");
 
   //send response to client
   *to_client = open(sp, O_WRONLY);
   write(*to_client, ACK, sizeof(ACK));
+  printf("sent ack\n");
 
   //receive final response from client
   char response[BUFFER_SIZE];
