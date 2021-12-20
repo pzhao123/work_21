@@ -15,13 +15,21 @@ int main() {
             
         int input = read(from_client, line, sizeof(line));
         if (input == -1) break;
-        int len = strlen(line);
-        int i;
-        for (i = 0; i < len; i++) {
-            if ((line[i] >= 'a' && line[i] <= 'z')) {
-                line[i] = line[i] - 32;
-            }
+        // int len = strlen(line);
+        // int i;
+        // for (i = 0; i < len; i++) {
+        //     if ((line[i] >= 'a' && line[i] <= 'z')) {
+        //         line[i] = line[i] - 32;
+        //     }
+        // }
+        int i=0;
+    while(line[i]!='\0')
+    {
+        if(line[i]>='a' && line[i]<='z'){
+            line[i]=line[i]-32;
         }
+        ++i;
+    }
         write(to_client, line, sizeof(line));
     
     }
