@@ -15,6 +15,7 @@ int server_handshake(int *to_client) {
 
   //make WKP
   mkfifo(WKP, 0644);
+  printf("made WKP\n")
 
   //read sp from client message and removes WKP
   from_client = open(WKP, O_RDONLY, 0);
