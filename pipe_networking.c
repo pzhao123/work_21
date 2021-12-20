@@ -31,6 +31,7 @@ int server_handshake(int *to_client) {
   read(from_client, response, sizeof(response));
   int ra = atoi(response);
   if (ra != (atoi(ACK)+1)) {
+    printf("fail\n");
     exit(0);
   }
   return from_client;
