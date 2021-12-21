@@ -31,7 +31,8 @@ int server_handshake(int *to_client) {
 
   //receive final response from client
   char response[BUFFER_SIZE];
-  read(from_client, response, sizeof(response));
+  int n = read(from_client, response, sizeof(response));
+  if (n == -1) printf("read error %d: %s\n", errno, strerror(errno));
   int ra = atoi(response);
   printf("testing for ack");
   if (ra != (atoi(ACK)+1)) {
