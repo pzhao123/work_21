@@ -32,6 +32,7 @@ int server_handshake(int *to_client) {
   //receive final response from client
   char response[BUFFER_SIZE];
   int n = read(from_client, response, sizeof(response));
+  if (n == -1) printf("read error %d: %s\n", errno, strerror(errno));
   int ra = atoi(response);
   printf("testing for ack");
   if (ra != (atoi(ACK)+1)) {
@@ -69,6 +70,7 @@ int client_handshake(int *to_server) {
   from_server = open(sp, O_RDONLY, 0);
   char msg[HANDSHAKE_BUFFER_SIZE];
   int n = read(from_server, msg, sizeof(msg));
+  if (n == -1) printf("read error %d: %s\n", errno, strerror(errno));
   //remove sp
   remove(sp);
 
