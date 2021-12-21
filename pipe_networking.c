@@ -25,7 +25,7 @@ int server_handshake(int *to_client) {
   printf("read sp\n");
 
   //send response to client
-  *to_client = open(sp, O_WRONLY);
+  *to_client = open(sp, O_WRONLY, 0);
   write(*to_client, ACK, sizeof(ACK));
   printf("sent ack\n");
 
