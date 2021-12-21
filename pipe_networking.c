@@ -66,9 +66,9 @@ int client_handshake(int *to_server) {
   write(*to_server, sp, sizeof(sp));
 
   //get response from server
-  from_server = open(sp, O_RDONLY);
+  from_server = open(sp, O_RDONLY, 0);
   char msg[HANDSHAKE_BUFFER_SIZE];
-  int n = read(*from_server, msg, HANDSHAKE_BUFFER_SIZE);
+  int n = read(from_server, msg, sizeof(msg));
   if (n == -1) printf("read error %d: %s\n", errno, strerror(errno));
   //remove sp
   remove(sp);
